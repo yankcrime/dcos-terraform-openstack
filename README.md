@@ -48,18 +48,23 @@ Terraform has been successfully initialized!
 Prior to deployment, we need to configure some cloud-specific variables which will be unique to each OpenStack installation.  Create a file called `terraform.tfvars` in the `dcos-terraform-openstack` directory and populate it with something such as the following:
 
 ``` hcl
-cluster_name = "test"
+cluster_name = "testing"
 floating_ip_pool = "internet"
 external_network_id = "c72d2f60-9497-48b6-ab4d-005995aa4b21"
 
 num_public_agents = "1"
-num_private_agents = "2"
+num_private_agents = "1"
 num_masters = "1"
 
 bootstrap_image = "CentOS 7.6-docker"
 master_image = "CentOS 7.6-docker"
 public_agent_image = "CentOS 7.6-docker"
 private_agent_image = "CentOS 7.6-docker"
+
+bootstrap_flavor_name = "chipolata"
+masters_flavor_name = "saveloy"
+private_agents_flavor_name = "saveloy"
+public_agents_flavor_name = "bratwurst"
 
 ssh_public_key_file = "~/.ssh/id_rsa.pub"
 

@@ -87,3 +87,22 @@ variable "dcos_exhibitor_storage_backend" {
   description = "options are static, aws_s3, azure, or zookeeper (recommended)"
 }
 
+variable "bootstrap_flavor_name" {
+  description = "The name of the flavor used for the bootstrap instance"
+  default = ""
+}
+
+variable "masters_flavor_name" {
+  description = "The name of the flavor used for the bootstrap instance"
+  default = ""
+}
+
+variable "public_agents_flavor_name" {
+  description = "The name of the flavor used for the bootstrap instance"
+  default = ""
+}
+
+variable "private_agents_flavor_name" {
+  description = "The name of the flavor used for the bootstrap instance"
+  default = ""
+}

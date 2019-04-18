@@ -17,6 +17,11 @@ module "dcos-infrastructure" {
   public_agent_image  = "${var.public_agent_image}"
   private_agent_image = "${var.private_agent_image}"
 
+  bootstrap_flavor_name = "${var.bootstrap_flavor_name}"
+  masters_flavor_name = "${var.masters_flavor_name}"
+  private_agents_flavor_name = "${var.private_agents_flavor_name}"
+  public_agents_flavor_name = "${var.public_agents_flavor_name}"
+
   num_masters        = "${var.num_masters}"
   num_private_agents = "${var.num_private_agents}"
   num_public_agents  = "${var.num_public_agents}"
