@@ -10,7 +10,7 @@ output "masters-loadbalancer" {
 
 output "masters-internal-loadbalancer" {
   description = "This is the internal load balancer address to access the DC/OS Services"
-  value       = "${module.dcos-infrastructure.lb.masters}"
+  value       = "${module.dcos-infrastructure.lb.masters.private_ip}"
 }
 
 output "public-agents-loadbalancer" {
