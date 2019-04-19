@@ -11,7 +11,7 @@ The Terraform code and scripts in this repository install and configure DC/OS on
 There are a number of bugs and limitations, but infrastructure-wise and off the top of my head:
 
 * No block storage service integration;
-* No DNS ([Designate DNaaS](https://docs.openstack.org/designate/latest/) is sadly still relatively rare across OpenStack deployments);
+* No DNS ([Designate DNSaaS](https://docs.openstack.org/designate/latest/) is sadly still relatively rare across OpenStack deployments);
 * No SSL.
 
 You will also need a compatible operating system image to use, in this case CentOS 7.6, ideally with Docker pre-installed.  You could add DC/OS pre-requisites such as this via cloud-init at time of bootstrap though if needs be.
