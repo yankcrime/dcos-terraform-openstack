@@ -28,11 +28,6 @@ variable "dcos_security" {
   description = "[Enterprise DC/OS] set the security level of DC/OS. Default is permissive. (recommended)"
 }
 
-variable "dcos_resolvers" {
-  default     = ""
-  description = "A YAML nested list (-) of DNS resolvers for your DC/OS cluster nodes. (recommended)"
-}
-
 variable "dcos_skip_checks" {
   default     = false
   description = "Upgrade option: Used to skip all dcos checks that may block an upgrade if any DC/OS component is unhealthly. (optional) applicable: 1.10+"
@@ -398,7 +393,8 @@ variable "dcos_master_list" {
 }
 
 variable "dcos_public_agent_list" {
-  default     = ""
+  type        = "list"
+  default     = [""]
   description = "statically set your public agents (not recommended)"
 }
 
@@ -413,13 +409,9 @@ variable "dcos_previous_version_master_index" {
 }
 
 variable "dcos_agent_list" {
-  default     = ""
+  type        = "list"
+  default     = [""]
   description = "used to list the agents in the config.yaml (optional)"
-}
-
-variable "dcos_bootstrap_port" {
-  default     = "80"
-  description = "used to specify the port of the bootstrap url"
 }
 
 variable "dcos_ip_detect_public_filename" {
@@ -476,4 +468,14 @@ variable "dcos_package_storage_uri" {
 variable "dcos_enable_mesos_input_plugin" {
   default     = ""
   description = "Indicates whether to enable Telegraf's Mesos input plugin to collect Mesos metrics from Mesos masters and agents. Options: `true` or `false` (optional)"
+}
+
+variable "dcos_resolvers" {
+  default     = ["1.1.1.1", "1.0.0.1"]
+  description = "A YAML nested list (-) of DNS resolvers for your DC/OS cluster nodes. (recommended)"
+}
+
+variable "dcos_bootstrap_port" {
+  default     = "8080"
+  description = "Port of the bootstrap URL"
 }

@@ -89,20 +89,20 @@ variable "dcos_exhibitor_storage_backend" {
 
 variable "bootstrap_flavor_name" {
   description = "The name of the flavor used for the bootstrap instance"
-  default = ""
+  default     = ""
 }
 
 variable "masters_flavor_name" {
   description = "The name of the flavor used for the bootstrap instance"
-  default = ""
+  default     = ""
 }
 
 variable "public_agents_flavor_name" {
   description = "The name of the flavor used for the bootstrap instance"
-  default = ""
+  default     = ""
 }
 
 variable "private_agents_flavor_name" {
   description = "The name of the flavor used for the bootstrap instance"
-  default = ""
+  default     = ""
 }

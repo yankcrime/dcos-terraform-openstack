@@ -17,10 +17,12 @@ module "dcos-infrastructure" {
   public_agent_image  = "${var.public_agent_image}"
   private_agent_image = "${var.private_agent_image}"
 
-  bootstrap_flavor_name = "${var.bootstrap_flavor_name}"
-  masters_flavor_name = "${var.masters_flavor_name}"
+  bootstrap_flavor_name      = "${var.bootstrap_flavor_name}"
+  masters_flavor_name        = "${var.masters_flavor_name}"
   private_agents_flavor_name = "${var.private_agents_flavor_name}"
-  public_agents_flavor_name = "${var.public_agents_flavor_name}"
+  public_agents_flavor_name  = "${var.public_agents_flavor_name}"
+
+  public_agents_additional_ports = ["6000", "6001", "6443"]
 
   num_masters        = "${var.num_masters}"
   num_private_agents = "${var.num_private_agents}"
@@ -32,7 +34,7 @@ module "dcos-infrastructure" {
 module "dcos-install" {
   source = "dcos-terraform/dcos-install-remote-exec/null"
 
-  version = "~> 0.1.0"
+  version = "~> 0.2.0"
 
   # bootstrap
   bootstrap_ip         = "${module.dcos-infrastructure.bootstrap.public_ip}"
@@ -46,14 +48,16 @@ module "dcos-install" {
   num_masters        = "${var.num_masters}"
 
   # private agent
-  private_agent_ips      = ["${module.dcos-infrastructure.private_agents.public_ips}"]
-  private_agents_os_user = "${var.private_agents_os_user}"
-  num_private_agents     = "${var.num_private_agents}"
+  private_agent_ips         = ["${module.dcos-infrastructure.private_agents.public_ips}"]
+  private_agent_private_ips = ["${module.dcos-infrastructure.private_agents.private_ips}"]
+  private_agents_os_user    = "${var.private_agents_os_user}"
+  num_private_agents        = "${var.num_private_agents}"
 
   # public agent
-  public_agent_ips      = ["${module.dcos-infrastructure.public_agents.public_ips}"]
-  public_agents_os_user = "${var.public_agents_os_user}"
-  num_public_agents     = "${var.num_public_agents}"
+  public_agent_ips         = ["${module.dcos-infrastructure.public_agents.public_ips}"]
+  public_agent_private_ips = ["${module.dcos-infrastructure.public_agents.private_ips}"]
+  public_agents_os_user    = "${var.public_agents_os_user}"
+  num_public_agents        = "${var.num_public_agents}"
 
   # DC/OS options
   dcos_cluster_name                            = "${var.cluster_name}"
@@ -62,7 +66,7 @@ module "dcos-install" {
   dcos_adminrouter_tls_1_1_enabled             = "${var.dcos_adminrouter_tls_1_1_enabled}"
   dcos_adminrouter_tls_1_2_enabled             = "${var.dcos_adminrouter_tls_1_2_enabled}"
   dcos_adminrouter_tls_cipher_suite            = "${var.dcos_adminrouter_tls_cipher_suite}"
-  dcos_agent_list                              = "${var.dcos_agent_list}"
+  dcos_agent_list                              = ["${var.dcos_agent_list}"]
   dcos_audit_logging                           = "${var.dcos_audit_logging}"
   dcos_auth_cookie_secure_flag                 = "${var.dcos_auth_cookie_secure_flag}"
   dcos_bootstrap_port                          = "${var.dcos_bootstrap_port}"
@@ -97,7 +101,6 @@ module "dcos-install" {
   dcos_gpus_are_scarce                         = "${var.dcos_gpus_are_scarce}"
   dcos_http_proxy                              = "${var.dcos_http_proxy}"
   dcos_https_proxy                             = "${var.dcos_https_proxy}"
-  dcos_install_mode                            = "${var.dcos_install_mode}"
   dcos_ip_detect_contents                      = "${coalesce(var.dcos_ip_detect_contents,file("${path.module}/scripts/ip-detect.sh"))}"
   dcos_ip_detect_public_contents               = "${coalesce(var.dcos_ip_detect_public_contents,file("${path.module}/scripts/ip-detect-public.sh"))}"
   dcos_ip_detect_public_filename               = "${var.dcos_ip_detect_public_filename}"
@@ -122,7 +125,7 @@ module "dcos-install" {
   dcos_previous_version                        = "${var.dcos_previous_version}"
   dcos_previous_version_master_index           = "${var.dcos_previous_version_master_index}"
   dcos_process_timeout                         = "${var.dcos_process_timeout}"
-  dcos_public_agent_list                       = "${var.dcos_public_agent_list}"
+  dcos_public_agent_list                       = ["${var.dcos_public_agent_list}"]
   dcos_resolvers                               = "${var.dcos_resolvers}"
   dcos_rexray_config                           = "${var.dcos_rexray_config}"
   dcos_rexray_config_filename                  = "${var.dcos_rexray_config_filename}"
