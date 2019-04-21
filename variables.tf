@@ -106,3 +106,8 @@ variable "private_agents_flavor_name" {
   description = "The name of the flavor used for the bootstrap instance"
   default     = ""
 }
+
+variable "public_agents_additional_ports" {
+  description = "List of additional ports allowed for public access on public agents"
+  default     = []
+}
