@@ -16,7 +16,7 @@ There are a number of bugs and limitations, but infrastructure-wise and off the 
 
 You will also need a compatible operating system image to use, in this case CentOS 7.6, ideally with Docker pre-installed.  You could add DC/OS pre-requisites such as this via cloud-init at time of bootstrap though if needs be.
 
-No guarantees are made about the utility of the resulting DC/OS deployment.
+No guarantees are made about the utility of the resulting DC/OS deployment, however it's been successfully tested on a couple of public OpenStack deployments including [CityCloud](https://citycloud.com).
 
 ## Getting started
 
