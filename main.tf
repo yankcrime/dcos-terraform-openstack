@@ -5,7 +5,7 @@
 */
 
 module "dcos-infrastructure" {
-  source = "../dcos-terraform-infrastructure-openstack"
+  source = "github.com/yankcrime/dcos-terraform-infrastructure-openstack"
 
   cluster_name        = "${var.cluster_name}"
   floating_ip_pool    = "${var.floating_ip_pool}"
@@ -17,17 +17,18 @@ module "dcos-infrastructure" {
   public_agent_image  = "${var.public_agent_image}"
   private_agent_image = "${var.private_agent_image}"
 
-  bootstrap_flavor_name          = "${var.bootstrap_flavor_name}"
-  masters_flavor_name            = "${var.masters_flavor_name}"
-  private_agents_flavor_name     = "${var.private_agents_flavor_name}"
-  public_agents_flavor_name      = "${var.public_agents_flavor_name}"
+  bootstrap_flavor_name      = "${var.bootstrap_flavor_name}"
+  masters_flavor_name        = "${var.masters_flavor_name}"
+  private_agents_flavor_name = "${var.private_agents_flavor_name}"
+  public_agents_flavor_name  = "${var.public_agents_flavor_name}"
+
   public_agents_additional_ports = "${var.public_agents_additional_ports}"
 
   num_masters        = "${var.num_masters}"
   num_private_agents = "${var.num_private_agents}"
   num_public_agents  = "${var.num_public_agents}"
 
-  user_data = "${file("user-data.conf")}"
+  user_data = "${var.user_data}"
 }
 
 module "dcos-install" {

@@ -111,3 +111,8 @@ variable "public_agents_additional_ports" {
   description = "List of additional ports allowed for public access on public agents"
   default     = []
 }
+
+variable "user_data" {
+  description = "user-data (cloud-init) contents to pass to instances"
+  default     = ""
+}
